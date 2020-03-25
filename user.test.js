@@ -77,12 +77,12 @@ const puppeteer = require('puppeteer')
 // edit profile test
 
 
-describe("editProfile" ,()=>{
-    test('test',async ()=>{
+
+    test('editProfile',async ()=>{
         const browser = await puppeteer.launch({
             headless :false,
-            slowMo:80,
-            args:['--window-size=1920 , 1080']
+            slowMo:60,
+            // args:['--window-size=1920 , 1080']
     
         })
         const page =await browser.newPage()
@@ -94,13 +94,17 @@ describe("editProfile" ,()=>{
            await page.type('#password','12345678')
            await page.click('button[type = submit]')
            await page.waitFor('button[type = submit]')
-        //    const url = await page.mainFrame().url()
-        //    await page.toContain('ads')
-           await page.goto('http://185.8.173.146:7070/users/12')
            await page.goto('http://185.8.173.146:7070/user/profile/editProfile')
-    
-
-
+           await page.waitFor('http://185.8.173.146:7070/user/profile/editProfile')
+           await page.focus('#username');
+           await page.type('#username','asdfghjk')
+           const elementHandle=await page.$('#username');
+           await elementHandle.click();
+           await elementHandle.focus();
+        // click three times to select all
+          await elementHandle.click({clickCount: 3});
+          await elementHandle.press('Backspace');
+          await elementHandle.type('sdfghj');
           
-    },90000)
-})
+    },60000)
+
