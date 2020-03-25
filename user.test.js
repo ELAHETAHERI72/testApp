@@ -81,7 +81,7 @@ const puppeteer = require('puppeteer')
     test('editProfile',async ()=>{
         const browser = await puppeteer.launch({
             headless :false,
-            slowMo:60,
+            slowMo:80,
             // args:['--window-size=1920 , 1080']
     
         })
@@ -95,10 +95,8 @@ const puppeteer = require('puppeteer')
            await page.click('button[type = submit]')
            await page.waitFor('button[type = submit]')
            await page.goto('http://185.8.173.146:7070/user/profile/editProfile')
-           await page.waitFor('http://185.8.173.146:7070/user/profile/editProfile')
-           await page.focus('#username');
-           await page.type('#username','asdfghjk')
-           const elementHandle=await page.$('#username');
+         
+           const elementHandle=await page.$('input[name=usernam]e');
            await elementHandle.click();
            await elementHandle.focus();
         // click three times to select all
@@ -106,5 +104,5 @@ const puppeteer = require('puppeteer')
           await elementHandle.press('Backspace');
           await elementHandle.type('sdfghj');
           
-    },60000)
+    },45398)
 
