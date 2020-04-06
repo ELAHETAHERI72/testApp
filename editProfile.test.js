@@ -92,6 +92,10 @@ const puppeteer = require('puppeteer')
           await page.click('#password')
           await page.type('#password','12345678')
           await page.click('.Button-sc-2wq7ng-1')
+          console.log('wait For Selector')
+          await page.waitForSelector('.Toastify__toast-body')
+          await browser.close();
+          
           
     },30000 )
 
