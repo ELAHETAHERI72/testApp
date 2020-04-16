@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const applicationConfig=require('./applicationConfig.js')
+const applicationConfig = require('./applicationConfig.js')
 
 
 
@@ -13,8 +13,8 @@ describe("register-Test" ,()=>{
     
         })
         const page =await browser.newPage()
-        // const app = ApplicationConfig()  
-        await page.goto(applocation_config.serverAddress+'/auth/register')
+        const app =new ApplicationConfig()
+        await page.goto(app.serverAddress+'/auth/register')
         await page.click('#username')
         await page.type('#username','elahe.ta.72@gmail.com')
         await page.click('button[type=submit]')
@@ -24,5 +24,5 @@ describe("register-Test" ,()=>{
 
 
           
-    },application_config.delay)
+    },app.delay)
 })

@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const applicationConfig=require('./applicationConfig.js')
+const applicationConfig = require('./applicationConfig.js')
 
 test('create post',async ()=>{
     const browser =await puppeteer.launch({
@@ -7,8 +7,8 @@ test('create post',async ()=>{
         slowMo:80
     })
     const page =await browser.newPage()
-   
-    await page.goto(applocation_config.serverAddress)
+    const app =new ApplicationConfig()
+    await page.goto(app.serverAddress)
     await page.waitForSelector('form');
            await page.click('#username')
            await page.type('#username','farazjalili@gmail.com')
@@ -37,4 +37,4 @@ test('create post',async ()=>{
            await page.type('#description','مبلمان دست دوم هشت نفره،رنگ قهوه ای تیره')
            await page.keyboard.press('Enter')
            await page.click('.Button-sc-2wq7ng-1')
-},application_config.delay)
+},app.delay)

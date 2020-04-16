@@ -9,8 +9,8 @@ test('inorrect-logintest',async()=>{
 
     })
     const page = await browser.newPage()
-    // const app =  ApplicationConfig()
-    await page.goto(application_config.serverAddress)    
+    const app =new ApplicationConfig()
+    await page.goto(app.serverAddress)    
     await page.waitForSelector('form');
     await page.click('#username')
     await page.type('#username','el.taheri.72@gmail.com')
@@ -23,7 +23,7 @@ test('inorrect-logintest',async()=>{
 
     expect(html).toBe('user or password is wrong');
     
-},30000)
+},app.delay)
 
 describe('correct-logintest-Test',()=>{
     
@@ -35,6 +35,7 @@ it('ّcorrect-logintest',async()=>{
 
     })
     const page = await browser.newPage()
+    const app =new ApplicationConfig()
     await page.goto(application_config.serverAddress+'/auth/login')
     await page.waitForSelector('form');
     await page.click('#username')
@@ -49,6 +50,6 @@ it('ّcorrect-logintest',async()=>{
     const url = await page.mainFrame().url();
     expect(url).toContain('ads'); // Uses Jest
     
-},application_config.delay)
+},app.delay)
 
 })

@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const applicationConfig=require('./applicationConfig.js')
+const applicationConfig = require('./applicationConfig.js')
 
 
     test('editProfile',async ()=>{
@@ -10,7 +10,8 @@ const applicationConfig=require('./applicationConfig.js')
     
         })
         const page =await browser.newPage()
-        await page.goto(applocation_config.serverAddress)
+        const app =new ApplicationConfig()
+        await page.goto(app.serverAddress)
            await page.waitForSelector('form');
            await page.click('#username')
            await page.type('#username','farazjalili@gmail.com')
@@ -19,7 +20,7 @@ const applicationConfig=require('./applicationConfig.js')
            await page.click('button[type = submit]')
            await page.waitFor('button[type = submit]')
     
-           await page.goto(applocation_config.serverAddress+'/user/profile/editProfile')
+           await page.goto(app.serverAddress+'/user/profile/editProfile')
 
            const Url = await page.mainFrame().url()
            expect(Url).toContain('editProfile');
@@ -88,5 +89,5 @@ const applicationConfig=require('./applicationConfig.js')
           await browser.close();
           
           
-    },application_config.delay )
+    },app.delay )
 

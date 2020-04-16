@@ -9,8 +9,8 @@ test('resetPssword',async()=>{
 
     })
     const page =await browser.newPage()
-    // const app =new ApplicationConfig()
-    await page.goto(applocation_config.serverAddress+'/auth/resetpassword')
+    const app =new ApplicationConfig()
+    await page.goto(app.serverAddress+'/auth/resetpassword')
     await page.click('#username')
     await page.type('#username','farazjalili@gmail.com')
     await page.click('button[type=submit]')
@@ -23,4 +23,4 @@ test('resetPssword',async()=>{
     const url = page.mainFrame.url()
     expect(url).toContain('login');
 
-},application_config.delay)
+},app.delay)
