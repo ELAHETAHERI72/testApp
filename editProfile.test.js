@@ -88,5 +88,5 @@ const applicationConfig=require('./applicationConfig.js')
           await browser.close();
           
           
-    },30000 )
+    },application_config.delay )
 

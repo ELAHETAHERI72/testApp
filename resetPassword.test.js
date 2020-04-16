@@ -23,4 +23,4 @@ test('resetPssword',async()=>{
     const url = page.mainFrame.url()
     expect(url).toContain('login');
 
-},30000)
+},application_config.delay)

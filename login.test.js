@@ -49,6 +49,6 @@ it('ّcorrect-logintest',async()=>{
     const url = await page.mainFrame().url();
     expect(url).toContain('ads'); // Uses Jest
     
-},30000)
+},application_config.delay)
 
 })

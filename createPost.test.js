@@ -37,4 +37,4 @@ test('create post',async ()=>{
            await page.type('#description','مبلمان دست دوم هشت نفره،رنگ قهوه ای تیره')
            await page.keyboard.press('Enter')
            await page.click('.Button-sc-2wq7ng-1')
-},30000)
+},application_config.delay)

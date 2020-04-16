@@ -24,5 +24,5 @@ describe("register-Test" ,()=>{
 
 
           
-    },30000)
+    },application_config.delay)
 })
