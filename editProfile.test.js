@@ -1,9 +1,5 @@
-const puppeteer = require('puppeteer')
-
-
-
-// ----------------------------------------// edit profile test
-
+const puppeteer = require('puppeteer');
+const config = require('./config')
 
 
     test('editProfile',async ()=>{
@@ -14,7 +10,8 @@ const puppeteer = require('puppeteer')
     
         })
         const page =await browser.newPage()
-           await page.goto('http://185.8.173.146:7070/auth/login')
+        const app = ApplicationConfig()
+        await page.goto(config.app.serverAddress)
            await page.waitForSelector('form');
            await page.click('#username')
            await page.type('#username','farazjalili@gmail.com')
@@ -23,7 +20,7 @@ const puppeteer = require('puppeteer')
            await page.click('button[type = submit]')
            await page.waitFor('button[type = submit]')
     
-           await page.goto('http://185.8.173.146:7070/user/profile/editProfile')
+           await page.goto(config.app.serverAddress+'/user/profile/editProfile')
 
            const Url = await page.mainFrame().url()
            expect(Url).toContain('editProfile');
@@ -34,7 +31,6 @@ const puppeteer = require('puppeteer')
            await page.click('elementHandle',{clickCount: 3})
            await page.keyboard.press('Backspace')
            await page.type('elementHandle','elahe.ta.72@gmail.com')
-
 
            const email=await page.$('#email');
            await page.click('email')
@@ -57,7 +53,6 @@ const puppeteer = require('puppeteer')
            await page.keyboard.press('Backspace')
            await page.type('first_name','علی')
 
-           
            const  last_name=await page.$('#last_name');
            await page.click('last_name')
            await page.focus('last_name')
@@ -65,9 +60,6 @@ const puppeteer = require('puppeteer')
            await page.keyboard.press('Backspace')
            await page.type('last_name','عظیمی')
       
-
-           
-  
            const bio = await page.$('#bio');
            await page.click('bio')
            await page.focus('bio')

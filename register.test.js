@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const config = require('./config')
 
 
 //-------------------------------- register-test--------------------------------///
@@ -11,7 +12,8 @@ describe("register-Test" ,()=>{
     
         })
         const page =await browser.newPage()
-        await page.goto('http://185.8.173.146:7070/auth/register')
+        const app = ApplicationConfig()  
+        await page.goto(config.app.serverAddress+'/auth/register')
         await page.click('#username')
         await page.type('#username','elahe.ta.72@gmail.com')
         await page.click('button[type=submit]')
