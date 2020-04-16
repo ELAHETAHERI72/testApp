@@ -1,7 +1,5 @@
 const puppeteer = require('puppeteer')
-
-
------------------------------------  reset password //
+const applicationConfig=require('./applicationConfig.js')
 
 test('resetPssword',async()=>{
     const browser =await puppeteer.launch({
@@ -11,7 +9,8 @@ test('resetPssword',async()=>{
 
     })
     const page =await browser.newPage()
-    await page.goto('http://185.8.173.146:7070/auth/resetpassword')
+    // const app =new ApplicationConfig()
+    await page.goto(applocation_config.serverAddress+'/auth/resetpassword')
     await page.click('#username')
     await page.type('#username','farazjalili@gmail.com')
     await page.click('button[type=submit]')

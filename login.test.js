@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const config = require('./config')
+const applicationConfig = require('./applicationConfig.js')
 
 test('inorrect-logintest',async()=>{
     const browser = await puppeteer.launch({
@@ -9,8 +9,8 @@ test('inorrect-logintest',async()=>{
 
     })
     const page = await browser.newPage()
-    const app = ApplicationConfig()
-    await page.goto(config.app.serverAddress)    
+    // const app =  ApplicationConfig()
+    await page.goto(application_config.serverAddress)    
     await page.waitForSelector('form');
     await page.click('#username')
     await page.type('#username','el.taheri.72@gmail.com')
@@ -35,7 +35,7 @@ it('ّcorrect-logintest',async()=>{
 
     })
     const page = await browser.newPage()
-    await page.goto(config.app.serverAddress+'/auth/login')
+    await page.goto(application_config.serverAddress+'/auth/login')
     await page.waitForSelector('form');
     await page.click('#username')
     await page.type('#username','farazjalili@gmail.com')

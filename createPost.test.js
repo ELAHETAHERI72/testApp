@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const config = require('./config')
+const applicationConfig=require('./applicationConfig.js')
 
 test('create post',async ()=>{
     const browser =await puppeteer.launch({
@@ -7,8 +7,8 @@ test('create post',async ()=>{
         slowMo:80
     })
     const page =await browser.newPage()
-    const app = ApplicationConfig()
-    await page.goto(config.app.serverAddress)
+   
+    await page.goto(applocation_config.serverAddress)
     await page.waitForSelector('form');
            await page.click('#username')
            await page.type('#username','farazjalili@gmail.com')
