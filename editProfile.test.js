@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const applicationConfig = require('./applicationConfig.js');
 
 describe('profileManager', () => {
-    // const app = new ApplicationConfig();
+    const app = new ApplicationConfig();
     // app.serverAddress + 
     // http://185.8.173.146:7070/auth/login
     // http://127.0.0.1/auth/login
@@ -14,7 +14,7 @@ describe('profileManager', () => {
 
         });
         const page = await browser.newPage();
-        await page.goto('http://127.0.0.1/auth/login');
+        await page.goto(app.serverAddress +'/auth/login');
         await page.waitForSelector('form');
         await page.click('#username');
         await page.type('#username', 'farazjalili@gmail.com');
@@ -95,7 +95,7 @@ describe('profileManager', () => {
         expect(popupvalue).toBe('تغییرات با موفقیت انجام شد.');
         await browser.close();
 
-    }, 90000)
+    }, app.delay)
 })
 
 

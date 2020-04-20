@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const applicationConfig = require('./applicationConfig.js');
 
 describe('checkprofileManager', () => {
-    // const app = new ApplicationConfig();
+    const app = new ApplicationConfig();
     // app.serverAddress + '/auth/login'
     // http://185.8.173.146:7070/auth/login
     // http://127.0.0.1/auth/login
@@ -14,7 +14,7 @@ describe('checkprofileManager', () => {
 
         });
         const page = await browser.newPage();
-        await page.goto('http://127.0.0.1/auth/login');
+        await page.goto(app.serverAddress + '/auth/login');
         await page.waitForSelector('form');
         await page.click('#username');
         await page.type('#username', 'farazjalili@gmail.com');
@@ -32,7 +32,7 @@ describe('checkprofileManager', () => {
         expect(imgSrc).toEqual(["http://185.8.173.146:8000/media/users/4.jpg"]);
         const username = await page.$eval('p.jnBOka', e => e.innerHTML);
         expect(username).toBe('OAG');
-    }, 90000)
+    }, app.delay)
 })
 
 
