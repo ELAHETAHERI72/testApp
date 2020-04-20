@@ -2,8 +2,8 @@ const puppeteer = require('puppeteer');
 const applicationConfig = require('./applicationConfig.js');
 
 describe('checkprofileManager', () => {
-    const app = new ApplicationConfig();
-    // app.serverAddress + 
+    // const app = new ApplicationConfig();
+    // app.serverAddress + '/auth/login'
     // http://185.8.173.146:7070/auth/login
     // http://127.0.0.1/auth/login
     test('checkProfile', async () => {
@@ -14,7 +14,7 @@ describe('checkprofileManager', () => {
 
         });
         const page = await browser.newPage();
-        await page.goto(app.serverAddress + '/auth/login');
+        await page.goto('http://127.0.0.1/auth/login');
         await page.waitForSelector('form');
         await page.click('#username');
         await page.type('#username', 'farazjalili@gmail.com');
@@ -26,14 +26,13 @@ describe('checkprofileManager', () => {
         await page.waitFor(2000);
         await page.waitForSelector('div.iaYNOa > div:nth-of-type(11)');
         await page.click('div.iaYNOa > div:nth-of-type(11)');
-        await page.waitForSelector('.dqNFUD> img');
-        await page.click('.dqNFUD > img');
-        const imgSrc = await page.$$eval('.hKRrWs > img[data-src]', imgs => imgs.map(img => img.getAttribute('data-src')));
+        await page.waitForSelector('.dqNFUD> img'); 
+        const imgSrc = await page.$$eval('.dqNFUD > img', imgs => imgs.map(img => img.getAttribute('src')));
         console.log(imgSrc);
-        expect(src).toBe('http://185.8.173.146:8000/media/users/4.jpg');
-        const username = await page.$eval('p.sc-bxivhb',e => e.innerHTML);
-        expect (username).toBe('OAG');
-    }, app.delay)
+        expect(imgSrc).toEqual(["http://185.8.173.146:8000/media/users/4.jpg"]);
+        const username = await page.$eval('p.jnBOka', e => e.innerHTML);
+        expect(username).toBe('OAG');
+    }, 90000)
 })
 
 
