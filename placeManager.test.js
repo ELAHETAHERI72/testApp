@@ -3,9 +3,9 @@ const applicationConfig = require('./applicationConfig.js');
 
 
 describe('placeManager Module Test', () => {
-    const app = new applicationConfig();
+    // const app = new applicationConfig();
 
-    test('myPlace', async () => {
+    test('myPlace', async() => {
         const browser = await puppeteer.launch({
             headless: false,
             slowMo: 80,
@@ -13,31 +13,33 @@ describe('placeManager Module Test', () => {
 
         });
         const page = await browser.newPage();
-        const app = new applicationConfig();
-        await page.goto(app.serverAddress + '/auth/login');
-        await page.waitForSelector('form');
-        await page.click('#username');
-        await page.type('#username', 'moshfeghi');
-        await page.click('#password');
-        await page.type('#password', '123456789');
-        await page.click('button[type = submit]');
-        await page.waitFor('button[type = submit]');
-        // const inputvalue = await page.$eval('#react-select-2-input',e=>e.value);
-        const adsLocation = await page.$eval('p.dJGqIF', e => e.innerHTML);
-        console.log(adsLocation);
+        // const app = new applicationConfig();
+        await page.goto('file:///C:/Users/elahe/Desktop/userTest/index.html');
+        const divManage = await page.$eval('#divManage', e => e.innerHTML);
+        console.log(divManage);
+        const arr = [];
+        for (i in divManage) {
+            const p = await page.$eval('p', e => e.innerHTML);
+            console.log(divManage[i]);
+            if (p != 'Quasi,') {
+                console.log('error');
+            }
+
+        }
+
         // adsLocation.forEach(instans =>{
         //     if(instans !=قزوین){
         //         console.log('error');
         //     }
         // })
 
-        
 
-        
 
-       
 
-    }, app.delay);
+
+
+
+    }, 90000);
 
 
 });

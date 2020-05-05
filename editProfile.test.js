@@ -6,7 +6,7 @@ describe('profileManager', () => {
     // app.serverAddress + 
     // http://185.8.173.146:7070/auth/login
     // http://127.0.0.1/auth/login
-    test('editProfile', async () => {
+    test('editProfile', async() => {
         const browser = await puppeteer.launch({
             headless: false,
             slowMo: 80,
@@ -14,7 +14,8 @@ describe('profileManager', () => {
 
         });
         const page = await browser.newPage();
-        await page.goto(app.serverAddress +'/auth/login');
+        const app = new ApplicationConfig();
+        await page.goto(app.serverAddress + '/auth/login');
         await page.waitForSelector('form');
         await page.click('#username');
         await page.type('#username', 'farazjalili@gmail.com');
@@ -23,16 +24,16 @@ describe('profileManager', () => {
         await page.click('button[type = submit]');
         await page.waitFor('button[type = submit]');
         /////////////////////////////
-        await page.waitForSelector('div.Aavatarstyles__AvatarWrapper-sc-1axqdm-0 > img.sc-bxivhb');
-        await page.click('div.Aavatarstyles__AvatarWrapper-sc-1axqdm-0 > img.sc-bxivhb');
-        await page.waitFor('ul.DropMenustyles__ListItems-sc-16hzthn-1 > a:first-child');
-        await page.click('ul.DropMenustyles__ListItems-sc-16hzthn-1 > a:first-child');
-        await page.waitForSelector('div.UsersProfilestyles__DetailWrapper-sc-1l58zrs-4 > button');
-        await page.click('div.UsersProfilestyles__DetailWrapper-sc-1l58zrs-4 > button');
+        await page.waitForSelector('[data-testid="userImage"]');
+        await page.click('[data-testid="userImage"]');
+        await page.waitFor('[data-testid="userProfileButton"]');
+        await page.click('[data-testid="userProfileButton"]');
+        await page.waitForSelector('[data-testid = "userProfileEditButton"]');
+        await page.click('[data-testid = "userProfileEditButton"]');
 
         await page.waitForSelector('#username');
         await page.evaluate(() => document.getElementById("username").value = "")
-        await page.type('#username', 'ali.ta.72@gmail.com');
+        await page.type('#username', 'alikz');
 
         await page.keyboard.down('Tab');
         const email = await page.$eval('#email', el => el.value);
@@ -82,21 +83,19 @@ describe('profileManager', () => {
         await page.waitFor(3000);
         await page.waitForSelector('#tealButton');
         await page.click('#tealButton');
-        const popupval = await page.$eval('.Toastify__toast Toastify__toast--success Toastify__toast--rtl',e =>e.innerHTML);
+        const popupval = await page.$eval('.Toastify__toast Toastify__toast--success Toastify__toast--rtl', e => e.innerHTML);
         expect(popupval).toBe('تغییرات با موفقیت انجام شد.');
-        
+
         await page.click('#old_password');
         await page.type('#old_password', '12345678');
 
         await page.click('#password');
         await page.type('#password', '12345678');
-        await page.click('.ProfileEditFormstyles__ActionWrapper-sc-11kjmne-0 > button');
-        const popupvalue = await page.$eval('.Toastify__toast Toastify__toast--success Toastify__toast--rtl',e =>e.innerHTML);
+        // .ProfileEditFormstyles__ActionWrapper-sc-11kjmne-0 > button
+        await page.click('[data-testid="resetPasswordSubmit"]');
+        const popupvalue = await page.$eval('.Toastify__toast Toastify__toast--success Toastify__toast--rtl', e => e.innerHTML);
         expect(popupvalue).toBe('تغییرات با موفقیت انجام شد.');
         await browser.close();
 
     }, app.delay)
 })
-
-
-
